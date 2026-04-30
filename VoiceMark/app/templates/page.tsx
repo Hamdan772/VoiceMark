@@ -36,7 +36,7 @@ export default function TemplatesPage() {
     const applyScript = () => {
         if (!script.trim()) return
         setSelectedScript({ script: script.trim(), name: title || 'Custom Script' })
-        router.push('/record')
+        router.push('/studio')
     }
 
     return (
@@ -48,114 +48,107 @@ export default function TemplatesPage() {
 
             <header className="sticky top-0 z-20 w-full border-b border-border/50 bg-background/70 backdrop-blur-xl">
                 <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
-                    <Link href="/modes" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
+                    <Link href="/studio" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
                         <ArrowLeft className="h-4 w-4" />
-                        Back
+                        Back to studio
                     </Link>
                     <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-semibold text-muted-foreground">
                         <Sparkles className="h-3.5 w-3.5" />
-                        Script setup
+                        {modeConfig.emoji}
+                        {modeConfig.label}
                     </div>
                 </div>
             </header>
 
-            <section className="relative mx-auto w-full max-w-6xl px-5 py-10">
+            <section className="mx-auto w-full max-w-6xl px-5 py-10 md:py-12">
                 <FlowPath
                     title="Setup sequence"
-                    subtitle="Use AI or templates to create a script, then head into the studio to record."
+                    subtitle="Script selection comes after mode selection so the prompts stay relevant to the session."
                     activeIndex={1}
                     steps={[
-                        { label: 'Choose a mode', href: '/modes', description: 'Pick the speaking context.' },
-                        { label: 'Pick a script', href: '/templates', description: 'Generate or select a template.' },
-                        { label: 'Practice in studio', href: '/record', description: 'Record, analyze, and retry.' },
-                        { label: 'Coach mode', href: '/coach', description: 'Live rehearsal support.' },
+                        { label: 'Choose a mode', href: '/modes', description: 'Set the speaking context.' },
+                        { label: 'Pick a script', href: '/templates', description: 'Generate or browse scripts.' },
+                        { label: 'Practice in studio', href: '/studio', description: 'Record and analyze your take.' },
+                        { label: 'Coach mode', href: '/coach', description: 'Rehearse with live alignment.' },
                     ]}
                 />
 
-                <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-                    <div className="rounded-3xl border border-border bg-card/70 p-6 motion-in">
-                        <div className="flex items-center justify-between gap-3">
-                            <div>
-                                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Script builder</p>
-                                <h1 className="mt-2 text-2xl font-display text-foreground">{modeConfig.emoji} {modeConfig.label}</h1>
-                            </div>
-                            <div className="rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold text-muted-foreground">
-                                {modeConfig.length}
-                            </div>
+                <div className="mt-8 rounded-[28px] border border-border bg-card/80 p-6 shadow-sm backdrop-blur-sm">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Script setup</p>
+                    <h1 className="mt-2 text-3xl font-display leading-tight text-foreground md:text-4xl">
+                        Choose a script, then drop straight into practice.
+                    </h1>
+                    <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
+                        This page is the setup step between choosing a mode and opening the recording studio. Generate a script, use a template, or jump back to the studio when you are ready.
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-2">
+                        {[
+                            'One task per page',
+                            'Mode-aware scripts',
+                            'Fast handoff to recording',
+                        ].map((label) => (
+                            <span key={label} className="inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                                <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                                {label}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
+                    <div className="rounded-3xl border border-border bg-card p-6 shadow-sm">
+                        <div className="mb-4 flex items-center gap-2">
+                            <WandSparkles className="h-5 w-5 text-primary" />
+                            <h2 className="text-lg font-bold text-foreground">Generate Script</h2>
                         </div>
+                        <p className="mb-4 text-sm leading-6 text-muted-foreground">
+                            Describe what you want to practice. I'll generate a script optimized for {modeConfig.label.toLowerCase()}.
+                        </p>
 
-                        <div className="mt-6 grid gap-4">
-                            <div className="grid gap-2">
-                                <label className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Topic</label>
-                                <input
-                                    value={topic}
-                                    onChange={(event) => setTopic(event.target.value)}
-                                    className="w-full rounded-2xl border border-border bg-background/80 px-4 py-3 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
-                                    placeholder="Describe your speaking topic"
-                                />
-                            </div>
-
-                            <div className="grid gap-4 md:grid-cols-2">
-                                <div className="grid gap-2">
-                                    <label className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Tone</label>
-                                    <input
-                                        value={tone}
-                                        onChange={(event) => setTone(event.target.value)}
-                                        className="w-full rounded-2xl border border-border bg-background/80 px-4 py-3 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
-                                    />
-                                </div>
-                                <div className="grid gap-2">
-                                    <label className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Length</label>
-                                    <input
-                                        value={length}
-                                        onChange={(event) => setLength(event.target.value)}
-                                        className="w-full rounded-2xl border border-border bg-background/80 px-4 py-3 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
-                                    />
-                                </div>
-                            </div>
+                        <div className="space-y-4">
+                            <textarea
+                                value={useCase}
+                                onChange={(e) => setUseCase(e.target.value)}
+                                placeholder={`E.g., "Practice explaining a complex technical project in an interview setting" or "Generate a 60-second elevator pitch for my SaaS product"`}
+                                className="h-36 w-full resize-none rounded-2xl border border-border bg-background p-4 text-sm text-foreground placeholder-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                            />
 
                             <button
-                                onClick={buildScript}
-                                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity btn-press"
+                                onClick={handleGenerateScript}
+                                disabled={!useCase.trim() || isGenerating}
+                                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                             >
-                                <Wand2 className="h-4 w-4" />
-                                Generate Script
+                                {isGenerating && <Loader2 className="h-4 w-4 animate-spin" />}
+                                {isGenerating ? 'Generating...' : 'Generate Script'}
                             </button>
 
-                            <div className="grid gap-2">
-                                <label className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Script draft</label>
-                                <textarea
-                                    value={script}
-                                    onChange={(event) => setScript(event.target.value)}
-                                    rows={8}
-                                    className="w-full rounded-3xl border border-border bg-background/80 px-4 py-4 text-sm leading-relaxed text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
-                                    placeholder="Your script will appear here."
-                                />
-                            </div>
-
-                            <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border bg-background/70 px-4 py-3">
-                                <div>
-                                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Ready to record</p>
-                                    <p className="text-sm text-foreground">Save your script and head into the studio.</p>
+                            {generatedScript && (
+                                <div className="rounded-2xl border border-border/60 bg-background p-4">
+                                    <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Generated script</p>
+                                    <p className="max-h-56 overflow-y-auto whitespace-pre-wrap text-sm leading-7 text-foreground">{generatedScript}</p>
+                                    <button
+                                        onClick={() => handleSelectTemplate(generatedScript)}
+                                        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                                    >
+                                        <Mic2 className="h-4 w-4" />
+                                        Use This Script
+                                    </button>
                                 </div>
-                                <button
-                                    onClick={applyScript}
-                                    disabled={!script.trim()}
-                                    className="inline-flex items-center justify-center rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 btn-press"
-                                >
-                                    Use this script
-                                </button>
-                            </div>
+                            )}
                         </div>
                     </div>
 
-                    <div className="rounded-3xl border border-border bg-card/70 p-6 motion-in" style={{ animationDelay: '90ms' }}>
+                    <div className="rounded-3xl border border-border bg-card p-6 shadow-sm">
+                        <div className="mb-4 flex items-center gap-2">
+                            <Sparkles className="h-5 w-5 text-primary" />
+                            <h2 className="text-lg font-bold text-foreground">Pre-built Templates</h2>
+                        </div>
+                        <p className="mb-4 text-sm leading-6 text-muted-foreground">
+                            Or pick from ready-made scripts designed for {modeConfig.label.toLowerCase()}.
+                        </p>
                         <TemplateGallery
-                            onSelectTemplate={(selectedScript, selectedTitle) => {
-                                setTitle(selectedTitle)
-                                setScript(selectedScript)
-                                setSelectedScript({ script: selectedScript, name: selectedTitle })
-                            }}
+                            onSelectTemplate={(script, name) => handleSelectTemplate(script, name)}
                         />
                     </div>
                 </div>

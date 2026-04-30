@@ -256,7 +256,7 @@ export default function CoachPage() {
             </div>
           </Link>
 
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <Link
               href="/settings"
               className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring btn-press"
@@ -265,7 +265,7 @@ export default function CoachPage() {
               <span className="hidden sm:inline">Settings</span>
             </Link>
             <Link
-              href="/record"
+              href="/studio"
               className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring btn-press"
             >
               <ArrowLeft className="h-4 w-4" />

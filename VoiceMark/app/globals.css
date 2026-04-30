@@ -290,7 +290,7 @@
     border-radius: 999px;
     filter: blur(18px);
     opacity: 0.45;
-    animation: loader-orb-drift 12s ease-in-out infinite;
+    animation: loader-orb-drift 6s ease-in-out infinite;
   }
 
   .loader-orb-1 {
@@ -316,7 +316,7 @@
     height: 220%;
     background: linear-gradient(120deg, transparent, color-mix(in oklch, var(--primary) 14%, transparent), transparent);
     opacity: 0.35;
-    animation: loader-sheen 14s ease-in-out infinite;
+    animation: loader-sheen 7s ease-in-out infinite;
   }
 
   .loader-panel {
@@ -333,7 +333,7 @@
     inset: 0;
     background: linear-gradient(120deg, transparent, color-mix(in oklch, var(--primary) 12%, transparent), transparent);
     opacity: 0.4;
-    animation: loader-sweep 6s ease-in-out infinite;
+    animation: loader-sweep 3s ease-in-out infinite;
     pointer-events: none;
   }
 
@@ -342,7 +342,7 @@
     width: 52px;
     border-radius: 999px;
     border: 1px dashed color-mix(in oklch, var(--primary) 42%, transparent);
-    animation: spin 8s linear infinite;
+    animation: spin 4s linear infinite;
   }
 
   .loader-ring {
@@ -354,12 +354,12 @@
     inset: -6px;
     border-radius: 999px;
     border: 1px solid color-mix(in oklch, var(--primary) 26%, transparent);
-    animation: loader-pulse 2.8s ease-in-out infinite;
+    animation: loader-pulse 1.4s ease-in-out infinite;
     opacity: 0.65;
   }
 
   .mic-plate {
-    animation: mic-breathe 3.2s ease-in-out infinite;
+    animation: mic-breathe 1.6s ease-in-out infinite;
   }
 
   .soft-blob {
@@ -396,6 +396,27 @@
   .lift-pro {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     box-shadow: 0 16px 32px -26px color-mix(in oklch, var(--foreground) 28%, transparent);
+  }
+
+  /* Typewriter caret (used by the Typewriter component) */
+  .typewriter-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: currentColor;
+    margin-left: 0.3rem;
+    vertical-align: bottom;
+    animation: type-caret-blink 1s step-end infinite;
+  }
+
+  @keyframes type-caret-blink {
+    50% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
 
   .lift-pro:hover {
