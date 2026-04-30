@@ -7,7 +7,8 @@ import { ArrowLeft, Sparkles, Wand2 } from 'lucide-react'
 import { FlowPath } from '@/components/flow-path'
 import { TemplateGallery } from '@/components/template-gallery'
 import { useSession } from '@/lib/session-context'
-import { getUseCaseMode } from '@/lib/use-case-modes'
+import { USE_CASE_MODES, getUseCaseMode } from '@/lib/use-case-modes'
+import type { UseCaseMode } from '@/lib/types'
 
 export default function TemplatesPage() {
     const router = useRouter()
@@ -15,7 +16,10 @@ export default function TemplatesPage() {
     const { session, setSelectedScript } = useSession()
 
     const initialMode = searchParams.get('mode') ?? session.mode
-    const modeConfig = useMemo(() => getUseCaseMode(initialMode), [initialMode])
+    const modeId = USE_CASE_MODES.some((mode) => mode.id === initialMode)
+        ? (initialMode as UseCaseMode)
+        : 'interview-mode'
+    const modeConfig = useMemo(() => getUseCaseMode(modeId), [modeId])
 
     const [title, setTitle] = useState('Custom Script')
     const [topic, setTopic] = useState('Explain your topic in a calm, confident tone.')
@@ -44,7 +48,6 @@ export default function TemplatesPage() {
 
             <header className="sticky top-0 z-20 w-full border-b border-border/50 bg-background/70 backdrop-blur-xl">
                 <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
-                    <Link href="/modes" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
                     <Link href="/modes" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
                         <ArrowLeft className="h-4 w-4" />
                         Back
