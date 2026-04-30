@@ -265,13 +265,8 @@ export default function CoachPage() {
               <span className="hidden sm:inline">Settings</span>
             </Link>
             <Link
-<<<<<<< HEAD
               href="/record"
               className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring btn-press"
-=======
-              href="/studio"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-sm transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
->>>>>>> 67de7a1e10aa22c98d1ee4b17356afb46ff19b6f
             >
               <ArrowLeft className="h-4 w-4" />
               Back to studio

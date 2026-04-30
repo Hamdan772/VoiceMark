@@ -5,14 +5,9 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useMemo, useState } from 'react'
 import { ArrowLeft, Sparkles, Wand2 } from 'lucide-react'
 import { FlowPath } from '@/components/flow-path'
-<<<<<<< HEAD
 import { TemplateGallery } from '@/components/template-gallery'
 import { useSession } from '@/lib/session-context'
 import { getUseCaseMode } from '@/lib/use-case-modes'
-=======
-import { useSession } from '@/lib/session-context'
-import type { UseCaseMode } from '@/lib/types'
->>>>>>> 67de7a1e10aa22c98d1ee4b17356afb46ff19b6f
 
 export default function TemplatesPage() {
     const router = useRouter()
@@ -34,19 +29,10 @@ export default function TemplatesPage() {
         setTitle('AI Draft')
     }
 
-<<<<<<< HEAD
     const applyScript = () => {
         if (!script.trim()) return
         setSelectedScript({ script: script.trim(), name: title || 'Custom Script' })
         router.push('/record')
-=======
-    const { setSelectedScript } = useSession()
-
-    const handleSelectTemplate = (script: string, name?: string) => {
-        // Persist only within the session (in-memory)
-        setSelectedScript({ script, name: name ?? 'Selected script' })
-        router.push(`/studio?mode=${mode}`)
->>>>>>> 67de7a1e10aa22c98d1ee4b17356afb46ff19b6f
     }
 
     return (
@@ -58,11 +44,8 @@ export default function TemplatesPage() {
 
             <header className="sticky top-0 z-20 w-full border-b border-border/50 bg-background/70 backdrop-blur-xl">
                 <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
-<<<<<<< HEAD
                     <Link href="/modes" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
-=======
-                    <Link href="/studio" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
->>>>>>> 67de7a1e10aa22c98d1ee4b17356afb46ff19b6f
+                    <Link href="/modes" className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
                         <ArrowLeft className="h-4 w-4" />
                         Back
                     </Link>
@@ -79,17 +62,10 @@ export default function TemplatesPage() {
                     subtitle="Use AI or templates to create a script, then head into the studio to record."
                     activeIndex={1}
                     steps={[
-<<<<<<< HEAD
                         { label: 'Choose a mode', href: '/modes', description: 'Pick the speaking context.' },
                         { label: 'Pick a script', href: '/templates', description: 'Generate or select a template.' },
                         { label: 'Practice in studio', href: '/record', description: 'Record, analyze, and retry.' },
                         { label: 'Coach mode', href: '/coach', description: 'Live rehearsal support.' },
-=======
-                        { label: 'Choose a mode', href: '/modes', description: 'Set the speaking context.' },
-                        { label: 'Pick a script', href: '/templates', description: 'Generate or browse scripts.' },
-                        { label: 'Practice in studio', href: '/studio', description: 'Record and analyze your take.' },
-                        { label: 'Coach mode', href: '/coach', description: 'Rehearse with live alignment.' },
->>>>>>> 67de7a1e10aa22c98d1ee4b17356afb46ff19b6f
                     ]}
                 />
 
@@ -172,15 +148,11 @@ export default function TemplatesPage() {
 
                     <div className="rounded-3xl border border-border bg-card/70 p-6 motion-in" style={{ animationDelay: '90ms' }}>
                         <TemplateGallery
-<<<<<<< HEAD
                             onSelectTemplate={(selectedScript, selectedTitle) => {
                                 setTitle(selectedTitle)
                                 setScript(selectedScript)
                                 setSelectedScript({ script: selectedScript, name: selectedTitle })
                             }}
-=======
-                            onSelectTemplate={(script, name) => handleSelectTemplate(script, name)}
->>>>>>> 67de7a1e10aa22c98d1ee4b17356afb46ff19b6f
                         />
                     </div>
                 </div>

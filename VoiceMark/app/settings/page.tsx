@@ -30,7 +30,6 @@ export default function SettingsPage() {
                 </div>
             </header>
 
-<<<<<<< HEAD
             <section className="relative mx-auto w-full max-w-5xl px-5 py-10">
                 <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                     <div className="rounded-3xl border border-border bg-card/70 p-6 motion-in">
@@ -42,31 +41,6 @@ export default function SettingsPage() {
                                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Microphone</p>
                                 <h1 className="text-2xl font-display text-foreground">Calibrate your setup</h1>
                             </div>
-=======
-            <section className="mx-auto w-full max-w-4xl px-5 py-10">
-                <div className="space-y-8">
-                    <FlowPath
-                        title="Support flow"
-                        subtitle="Calibration is a support task, not part of the main practice loop, so it now sits on its own path."
-                        activeIndex={2}
-                        steps={[
-                            { label: 'Choose a mode', href: '/modes', description: 'Set the speaking context.' },
-                            { label: 'Pick a script', href: '/templates', description: 'Prepare your session text.' },
-                            { label: 'Practice in studio', href: '/studio', description: 'Record and review.' },
-                            { label: 'Calibration', href: '/settings', description: 'Check microphone quality.' },
-                        ]}
-                    />
-
-                    <div className="rounded-2xl border border-border bg-card p-6">
-                        <div className="mb-6">
-                            <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                                <RotateCcw className="h-5 w-5" />
-                                Microphone Calibration
-                            </h2>
-                            <p className="text-sm text-muted-foreground mt-2">
-                                Fine-tune your microphone for optimal voice detection and noise filtering.
-                            </p>
->>>>>>> 67de7a1e10aa22c98d1ee4b17356afb46ff19b6f
                         </div>
 
                         <div className="mt-6">
@@ -114,22 +88,6 @@ export default function SettingsPage() {
                             We never store raw audio. Transcription happens locally and only your text is analyzed.
                         </div>
                     </div>
-<<<<<<< HEAD
-=======
-
-                    <div className="rounded-2xl border border-border bg-card p-6">
-                        <h2 className="text-lg font-bold text-foreground mb-2">Keep the page focused</h2>
-                        <p className="text-sm leading-6 text-muted-foreground">
-                            Calibration is the only setting that directly improves recording quality, so the page now stays centered on that task.
-                        </p>
-                        <Link
-                            href="/studio"
-                            className="mt-4 inline-flex items-center justify-center rounded-full bg-foreground px-4 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
-                        >
-                            Back to studio
-                        </Link>
-                    </div>
->>>>>>> 67de7a1e10aa22c98d1ee4b17356afb46ff19b6f
                 </div>
             </section>
         </main>
